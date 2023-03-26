@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Extraction</title>
+</head>
+<body>
+    <!-- <form action="http://localhost:8000/uploadfile" method="post" enctype="multipart/form-data"> -->
+        <input type="file" id="file">
+        <button id="btn" type="button" onclick="onP()">Submit</button>
+        <span id="abcd">d</span>
+
+        <!-- <video src="http://www.duramaterials.in/files/pexels-richard-he-5567711-2.mp4" autoplay="true" loop=""true></video> -->
+    <!-- </form> -->
+    <script>
+        async function onP() {
+            console.log('sending...');
+            const file = document.getElementById('file').files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await fetch('http://localhost:8000/uploadfile', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    // 'Content-Type': 'multipart/form-data',
+                    // 'Content-Type': 'application/json'
+                    'Accept': 'application/json'
+                }
+            });
+            const data = await response.json();
+            // alert(data)
+            // console.log(data);
+            document.getElementById('abcd').innerHTML = data;
+        }
+    </script>
+</body>
+</html>
